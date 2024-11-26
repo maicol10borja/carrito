@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido - Manejo de Sesiones</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bienvenido al Manejo de Sesiones</h1>
+
+    <!-- Comprobamos si el usuario ha iniciado sesión -->
+    <div id="loginStatus">
+        <p id="welcomeMessage"></p>
+    </div>
+
+    <div class="list-group">
+        <a href="/webapp_session/productos" class="list-group-item list-group-item-action btn btn-info">Ver productos</a>
+        <a href="/webapp_session/login.html" class="list-group-item list-group-item-action btn btn-primary">Login</a>
+        <a href="/webapp_session/logout" class="list-group-item list-group-item-action btn btn-danger">Logout</a>
+    </div>
+</div>
+
+<script>
+    // Aquí puedes agregar un script que verifique si el usuario ha iniciado sesión
+    // y personalice el mensaje de bienvenida en función de eso.
+    // Este es solo un ejemplo de cómo podrías hacerlo con JavaScript.
+
+    fetch('/webapp_session/check-session')
+        .then(response => response.json())
+        .then(data => {
+            if (data.loggedIn) {
+                document.getElementById('welcomeMessage').innerText = `Hola, ${data.username}. ¡Bienvenido!`;
+                document.getElementById('loginStatus').style.display = 'block';
+            } else {
+                document.getElementById('welcomeMessage').innerText = '';
+                document.getElementById('loginStatus').style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+
+<script src=""></script>
+</body>
+</html>
+
